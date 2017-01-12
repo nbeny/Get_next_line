@@ -3,25 +3,16 @@
 
 int	main(int ac, char **av)
 {
-	int	fd;
+	int		fd;
 	char	*line;
+	int		i;
 
 	fd = open(av[1], O_RDONLY);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
+
+	while ((i = get_next_line(fd, &line)) > 0)
+	{
+		printf("%d = %s\n", i, line);
+	}
+	printf("%d", get_next_line(fd, &line));
 	return (0);
 }

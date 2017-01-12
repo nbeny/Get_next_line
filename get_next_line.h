@@ -6,7 +6,7 @@
 /*   By: nbeny <nbeny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 19:34:24 by nbeny             #+#    #+#             */
-/*   Updated: 2016/12/14 16:07:26 by nbeny            ###   ########.fr       */
+/*   Updated: 2017/01/12 17:51:51 by nbeny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft/libft.h"
 # include <fcntl.h>
 
-# define BUFF_SIZE 10
+# define BUFF_SIZE 13
 
 int		get_next_line(const int fd, char **line);
 #endif
