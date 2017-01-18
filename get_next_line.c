@@ -1,66 +1,64 @@
 #include "get_next_line.h"
-#include <stdio.h>
-static int	ft_stock(char **save, int fd)
+
+static int	ft_stock_buffer(int fd, char **save)
+{
+	int	ret;
+	char	buff[BUFF_SIZE + 1];
+
+	if (*save != NULL && ft_strchr(*save, '\n'))
+		return (1);
+	ft_bzero(buff, sizeof(buff));
+	while ((ret = read(fd, buff, BUFF_SIZE)) > 0)
+	{
+		if (*save == NULL)
+		{
+			*save = ft_strnew(1);
+			*save = "";
+		}
+		*save = ft_strjoin(*save, buff);
+		if (*save == NULL)
+			return (-1);
+		if (ft_strchr(*save, '\n') != NULL)
+			break ;
+		ft_bzero(buff, sizeof(buff));
+	}
+	return (ret <= 0 ? ret : 1);
+}
+
+static void	ft_make_line(char **line, char **save, int *ret)
+{
+	char	*ptr;
+
+	if (*save != NULL && ft_strlen(*save) > 0)
+	{
+		*ret = 1;
+		ptr = ft_strchr(*save, '\n');
+		if (ptr == NULL)
+		{
+			*line = *save;
+			*save = NULL;
+		}
+		else
+		{
+			*line = *save;
+			*ptr = '\0';
+			*save = ft_strdup(ptr + 1);
+		}
+	}
+	return ;
+}
+
+int		get_next_line(const int fd, char **line)
 {
 	int		ret;
-	char		*buff;
-	char		*stop;
+	static char	*save = NULL;
 
-	stop = NULL;
-	buff = ft_strnew(BUFF_SIZE);
-	while (stop == NULL && (ret = read(fd, buff, BUFF_SIZE)))
-	{
-		if (ret == -1)
-			return (-1);
-		buff[ret] = '\0';
-		*save = ft_strjoin(*save, buff);
-		//printf("save = %s\n", *save);
-		stop = ft_strchr(buff, '\n');	
-	}
-	free(buff);
-	buff = NULL;
-	return (0);
-}
-
-static int	ft_get_line(char **line, char **save)
-{
-	char	*tmp;
-
-	//printf("savestart = %s\n", *save);
-	if ((tmp = ft_strchr(*save, '\n')))
-	{
-		*tmp = '\0';
-		*line = ft_strdup(*save);
-		//printf("save1 = %s\n", *save);fflush(stdout);
-		free(*save);
-		*save = ft_strdup(tmp + 1);
-		if (*save[0] <= 0)
-			*save = NULL;
-		//printf("save2 = %s\n", *save);fflush(stdout);
-		tmp = NULL;
-		return (1);
-	}
-	else if (save != NULL)
-	{
-		*line = ft_strdup(*save);
-		free(*save);
-		*save = NULL;
-		return (1);
-	}
-	return (0);
-}
-
-int			get_next_line(const int fd, char **line)
-{
-	static char	*save = "";
-
-	//if (fd < 0 || !line || BUFF_SIZE <= 0)
-	  //	return (-1);
-	if (save == NULL)
-		return (0);
-	if (ft_stock(&save, fd) == -1)
+	if (line == NULL)
 		return (-1);
-	if (ft_get_line(line, &save) == 0)
-		return (0);
-	return (1);
+	*line = NULL;
+	ret = ft_read(fd, &save);
+	if (ret < 0)
+		return (-1);
+	ft_make_line(line, &save, &ret);
+	return (ret);
 }

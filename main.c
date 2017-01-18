@@ -8,6 +8,7 @@ int	main(int ac, char **av)
 	int		i;
 
 	(void)ac;
+	line = NULL;
 	fd = open(av[1], O_RDONLY);
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
