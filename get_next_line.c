@@ -56,7 +56,7 @@ int		get_next_line(const int fd, char **line)
 	if (line == NULL)
 		return (-1);
 	*line = NULL;
-	ret = ft_read(fd, &save);
+	ret = ft_stock_buffer(fd, &save);
 	if (ret < 0)
 		return (-1);
 	ft_make_line(line, &save, &ret);
