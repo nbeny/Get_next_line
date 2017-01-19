@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbeny <nbeny@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/19 04:10:49 by nbeny             #+#    #+#             */
+/*   Updated: 2017/01/19 04:10:59 by nbeny            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 static int	ft_stock_buffer(int fd, char **save)
 {
-	int	ret;
+	int		ret;
 	char	buff[BUFF_SIZE + 1];
 
 	if (*save != NULL && ft_strchr(*save, '\n'))
@@ -48,9 +60,9 @@ static void	ft_make_line(char **line, char **save, int *ret)
 	return ;
 }
 
-int		get_next_line(const int fd, char **line)
+int			get_next_line(const int fd, char **line)
 {
-	int		ret;
+	int			ret;
 	static char	*save = NULL;
 
 	if (line == NULL)
