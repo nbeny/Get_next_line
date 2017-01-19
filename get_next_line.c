@@ -20,7 +20,7 @@ static int	ft_stock_buffer(int fd, char **save)
 			return (-1);
 		if (ft_strchr(*save, '\n') != NULL)
 			break ;
-		ft_bzero(buff, sizeof(buff));
+		ft_bzero(buff, ft_strlen(buff));
 	}
 	return (ret <= 0 ? ret : 1);
 }
