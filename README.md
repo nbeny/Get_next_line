@@ -1,4 +1,7 @@
 # Project Get next line
+>>>> ##### exploration project.
 
-A ne pas utiliser ! Il pue la merde...
-Go voir le GNL du project Minishell.
+##### Grade ``(106/100)`` ``(106/125)*``
+--------  -----------------------
+
+Fonctionnel, mais pue le leaks.
