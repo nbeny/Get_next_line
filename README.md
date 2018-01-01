@@ -5,4 +5,5 @@
 --------  -----------------------
 
 Fonctionnel, avec quelques leaks.
+
 -> voir le GNL dans la libft de Minishell.
